@@ -1,5 +1,5 @@
 import os
-
+import subprocess, sys
 
 def remove_before_last_slash(path):
     last_slash_index = path.rfind('/')
@@ -43,4 +43,8 @@ def delete_all_files_in_folder_with_extension(folder_path, extension):
 
 def open_folder(folder_path="destination"):
     if folder_path:
-        os.startfile(folder_path)
+        if sys.platform.startswith('win'):
+            os.startfile(folder_path)
+        else:
+            opener = "open" if sys.platform == "darwin" else "xdg-open"
+            subprocess.call([opener, folder_path])

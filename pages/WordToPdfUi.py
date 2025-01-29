@@ -43,7 +43,7 @@ class WordToPdfUi(tk.Frame):
     def open_file_dialog(self):
         file_path = filedialog.askopenfilename(
             title="Виберіть Word документ",
-            filetypes=[("Word документи", "*.doc;*.docx")]
+            filetypes=[("Word документи", "*.doc"), ("Word документи", "*.docx")]
         )
         if file_path:
             self.file_path = file_path

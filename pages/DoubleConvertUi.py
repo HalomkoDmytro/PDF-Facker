@@ -53,7 +53,7 @@ class DoubleConvertUi(tk.Frame):
                 self.label_path.config(text=f"Конвертація в пдф ...")
                 new_pdf_file_name = remove_dimension(remove_before_last_slash(self.file_path))
                 jpegs = get_file_paths_with_extension(".\\temp", ".jpg")
-                images_to_pdf(jpegs, f".\\destination\\{new_pdf_file_name}.pdf")
+                images_to_pdf(sorted(jpegs), f".\\destination\\{new_pdf_file_name}.pdf")
 
                 delete_all_files_in_folder(".\\temp")
 
