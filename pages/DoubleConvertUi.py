@@ -1,5 +1,6 @@
-from tkinter import filedialog
+import re
 import tkinter as tk
+from tkinter import filedialog
 
 from converter.img_to_pdf import images_to_pdf
 from converter.pdf_to_img import pdf_to_jpeg
@@ -53,7 +54,12 @@ class DoubleConvertUi(tk.Frame):
                 self.label_path.config(text=f"Конвертація в пдф ...")
                 new_pdf_file_name = remove_dimension(remove_before_last_slash(self.file_path))
                 jpegs = get_file_paths_with_extension(".\\temp", ".jpg")
-                images_to_pdf(sorted(jpegs), f".\\destination\\{new_pdf_file_name}.pdf")
+                sorted_images =  sorted(
+                    jpegs,
+                    key=lambda x: int(re.search(r'page_(\d+)', x).group(1))
+                )
+
+                images_to_pdf(sorted_images, f".\\destination\\{new_pdf_file_name}.pdf")
 
                 delete_all_files_in_folder(".\\temp")
 
